@@ -38,4 +38,11 @@ def run_eda():
     fig = plt.figure()
     sns.barplot(x='region', y='charges', hue='children', data=df, palette='Set1', ci = None)
     st.pyplot(fig)
-    st.text('뚜렷한 차이는 보이지 않는다.')
+    st.text('뚜렷한 차이는 보이지 않는다.\n')
+
+    st.subheader('흡연 여부에 따른 나이, bmi에 의한 보험비는?')
+    fig = sns.lmplot(x = 'age', y = 'charges', data=df, hue='smoker', palette='Set1')
+    st.pyplot(fig)
+    fig = sns.lmplot(x = 'bmi', y = 'charges', data=df, hue='smoker', palette='Set2')
+    st.pyplot(fig)
+    st.text('흡연 여부가 중요하며 나이,bmi는 보험비와 약한 양의 상관관계를 보인다.')

@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 def run_home():
-    st.title('미국 의료 보험비에 영향을 미치는 요소들과 보험비 예상')
+    st.subheader('미국 의료 보험비에 영향을 미치는 요소들과 보험비 예상')
 
     url = 'https://i.imgur.com/zTnvOcb.jpg'   
     st.image(url)
