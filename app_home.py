@@ -9,7 +9,7 @@ def run_home():
 
     st.text('나이, 성별, bmi, 자녀수, 흡연 여부, 지역에 따라 보험비는 어떻게 다를까요?\n위 요소들에 따라 보험비를 예측해 봅시다.')
 
-    df = pd.read_csv('insurance.csv')
+    df = pd.read_csv('data/insurance.csv')
     st.subheader('데이터 미리보기')
     st.dataframe(df)
 

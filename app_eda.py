@@ -3,17 +3,23 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import joblib
 
 def run_eda():
-    df = pd.read_csv('insurance.csv')
+    df = pd.read_csv('data/insurance.csv')
  
-    st.subheader('연간 보험비 분포 그래프')
+    st.subheader('분포 그래프')
     fig = plt.figure()
     sns.set(style='whitegrid')
-    sns.histplot(df['charges'], kde = True, color = 'c')
-    plt.title('Distribution of Charges')
+    selected = st.selectbox('컬럼 선택', df.columns)
+    sns.histplot(df[selected], color = 'c')
     st.pyplot(fig)
-    st.text('10000달러 이하가 많고 20000달러 이상은 적다.')
+
+    st.subheader('보험비 최대와 최소')
+    st.dataframe(df.loc[df['charges'] == df['charges'].max()])
+    st.text('보험비가 최대인 사람은 나이와 bmi가 평균보다 높으며 흡연자다.')
+    st.dataframe(df.loc[df['charges'] == df['charges'].min()])
+    st.text('보험비가 최소인 사람은 나이와 bmi가 평균보다 낮으며 비흡연자다.')
 
     st.subheader('4개의 지역간 차이는 어떻게 될까?')
     fig = plt.figure()
@@ -46,3 +52,15 @@ def run_eda():
     fig = sns.lmplot(x = 'bmi', y = 'charges', data=df, hue='smoker', palette='Set2')
     st.pyplot(fig)
     st.text('흡연 여부가 중요하며 나이,bmi는 보험비와 약한 양의 상관관계를 보인다.')
+
+    encoder_sex = joblib.load('data/encoder_sex.pkl')
+    encoder_smoker = joblib.load('data/encoder_smoker.pkl')
+    encoder_region = joblib.load('data/encoder_region.pkl')
+    df['sex'] = encoder_sex.fit_transform(df['sex'])
+    df['smoker'] = encoder_smoker.fit_transform(df['smoker'])
+    df['region'] = encoder_region.fit_transform(df['region'])
+    st.subheader('레이블 인코딩 후 상관계수는?')
+    fig = plt.figure()
+    sns.heatmap(df.corr(), annot=True, cmap=sns.color_palette("YlGnBu", 10))
+    st.pyplot(fig)
+    st.text('흡연 여부가 보험비와 강한 양의 상관관계를 보인다.')
