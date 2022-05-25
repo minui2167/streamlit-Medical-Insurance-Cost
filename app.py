@@ -13,7 +13,6 @@ def main():
     df = pd.read_csv('data/insurance.csv')
     st.sidebar.subheader('데이터')
     st.sidebar.dataframe(df)
-    st.balloons()
 
     if choice == menu[0]:
         run_home()
