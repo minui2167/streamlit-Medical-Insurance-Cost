@@ -7,8 +7,9 @@ from app_ml import run_ml
 
 
 def main():
-    st.set_page_config('보험비 분석 및 예측 앱')
+    st.set_page_config('보험비 분석 및 예측')
     menu = ['Home', '분석', '예측']
+    st.sidebar.title('보험비 분석 및 예측')
     choice = st.sidebar.selectbox('메뉴 선택', menu)
     df = pd.read_csv('data/insurance.csv')
     st.sidebar.subheader('데이터')
