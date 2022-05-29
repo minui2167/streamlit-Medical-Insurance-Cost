@@ -1,15 +1,13 @@
 import streamlit as st
 import numpy as np
-import pandas as pd
 import joblib
+import plotly.express as px
 
 def run_ml():
-    encoder_sex = joblib.load('data/encoder_sex.pkl')
-    encoder_smoker = joblib.load('data/encoder_smoker.pkl')
-    encoder_region = joblib.load('data/encoder_region.pkl')
+    ct = joblib.load('data/ct.pkl')
     m_scaler = joblib.load('data/m_scaler.pkl')
     rfr = joblib.load('data/rfr.pkl')
-    st.subheader('RandomForestRegressor 통해서 예측해보기')
+    st.subheader('보험비 예측')
 
     age = st.number_input('나이', 18, 120, value = 40)
     sex = st.selectbox('성별', ['남자', '여자'])
@@ -30,8 +28,20 @@ def run_ml():
 
     if st.button('예측'):
         test = np.array([age, sex, bmi, children, smoker, region])
-        test[1] = encoder_sex.transform(pd.Series(test[1]))[0]
-        test[4] = encoder_smoker.transform(pd.Series(test[4]))[0]
-        test[5] = encoder_region.transform(pd.Series(test[5]))[0]
-        test = m_scaler.transform(test.reshape(1, -1))
+        test = test.reshape(1, -1)
+        test = ct.transform(test)
+        test = m_scaler.transform(test)
         st.text('예상 보험비는 '+str(rfr.predict(test)[0].round(4)) + ' 달러 입니다.')
+
+    importances = rfr.feature_importances_
+    indices = np.argsort(importances)[::-1]
+    variables = ['sex', 'smoker', 'region', 'age','bmi', 'children']
+    importance_list = []
+    for f in range(len(variables)):
+        variable = variables[indices[f]]
+        importance_list.append(variable)
+
+    st.subheader('feature importances')
+    fig = px.bar(x = importance_list, y = importances[indices])
+    st.plotly_chart(fig)
+    st.text('흡연여부가 제일 중요하며, 다음으로 bmi와 age가 영향을 미친다. 나머지는 별로 안 중요하다.')
