@@ -18,10 +18,9 @@ def run_eda():
     st.text('보험비가 최소인 사람은 나이와 bmi가 평균보다 낮으며 비흡연자다.')
 
     st.subheader('4개의 지역간 차이는 어떻게 될까?')
-    charges = df['charges'].groupby(df.region).sum().sort_values(ascending = True)
-    fig = px.bar(x = charges, y = charges.index)
+    fig = px.histogram(df, x = "region", y = "charges", color = 'region', barmode = 'group', histfunc = 'avg')
     st.plotly_chart(fig)
-    st.text('남동부는 50000달러가 넘고 나머지는 40000달러대다.')
+    st.text('남동부가 가장 비싸고 남서부가 가장 싸다.')
 
     st.subheader('성별간 차이는 얼마나 날까?')
     fig = px.histogram(df, x = "region", y = "charges", color = 'sex', barmode = 'group', histfunc = 'avg')
