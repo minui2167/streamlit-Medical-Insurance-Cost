@@ -51,7 +51,7 @@ def run_eda():
     df_corr = df_corr1.join(df_corr2)
     df_corr.columns = ['sex', 'smoker', 'region', 'age', 'bmi', 'children', 'charges']
     st.subheader('인코딩 후 상관계수는?')
-    fig = px.imshow(df_corr.corr())
+    fig = px.imshow(df_corr.corr(), text_auto = '.1f')
     st.plotly_chart(fig)
     st.text('흡연 여부가 보험비와 강한 양의 상관관계를 보인다.')
     print(df_corr.corr())
