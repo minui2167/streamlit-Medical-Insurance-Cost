@@ -2,8 +2,10 @@ import streamlit as st
 import numpy as np
 import joblib
 import plotly.express as px
+import pandas as pd
 
 def run_ml():
+    df = pd.read_csv('data/insurance.csv')
     ct = joblib.load('data/ct.pkl')
     m_scaler = joblib.load('data/m_scaler.pkl')
     rfr = joblib.load('data/rfr.pkl')
@@ -13,7 +15,7 @@ def run_ml():
     sex = st.selectbox('성별', ['남자', '여자'])
     bmi = st.number_input('bmi', 10.0, 70.0, value = 30.0)
     children = st.number_input('자녀수', 0)
-    region = st.selectbox('지역', ['southwest', 'southeast', 'northwest', 'northeast'])
+    region = st.selectbox('지역', df['region'].unique())
     smoker = st.checkbox('흡연 여부')
 
     if sex == '남자':
