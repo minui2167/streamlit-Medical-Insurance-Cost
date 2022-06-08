@@ -9,12 +9,24 @@
 
 보험비에 영향을 미치는 요소들을 시각화 해보고 보험비를 예측하는 앱입니다.
 
+데이터 출처 kaggle
+
 ![사진](https://i.imgur.com/zTnvOcb.jpg)
+
+# 데이터셋
+
+* age 나이
+* sex 성별
+* bmi bmi
+* children 자녀수
+* smoker 흡연여부
+* region 지역
+* charges 보험비
 
 # 분석
 
-* plotly를 통해서 시각화 
-* 각 요소별로 나눠서 보험비 시각화 
+* plotly를 통해서 각 요소의 분포 시각화
+* 각 요소별로 구분지어서 보험비 분포 시각화 
 
 # 보험비 예측
 
