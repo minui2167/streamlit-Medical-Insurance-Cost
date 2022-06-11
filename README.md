@@ -9,7 +9,7 @@
 
 보험비에 영향을 미치는 요소들을 시각화 해보고 보험비를 예측하는 앱입니다.
 
-데이터 출처 kaggle
+데이터 출처 [https://www.kaggle.com/datasets/mirichoi0218/insurance](https://www.kaggle.com/datasets/mirichoi0218/insurance)
 
 ![사진](https://i.imgur.com/zTnvOcb.jpg)
 
