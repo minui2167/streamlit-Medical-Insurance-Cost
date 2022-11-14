@@ -5,7 +5,7 @@
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/streamlit-FF4B4B.svg?style=for-the-badge&logo=streamlit&logoColor=white)
 
-[http://ec2-3-35-26-163.ap-northeast-2.compute.amazonaws.com:8502/](http://ec2-3-35-26-163.ap-northeast-2.compute.amazonaws.com:8502/)
+[http://ec2-3-34-50-142.ap-northeast-2.compute.amazonaws.com:8502/](http://ec2-3-34-50-142.ap-northeast-2.compute.amazonaws.com:8502/)
 
 보험비에 영향을 미치는 요소들을 시각화 해보고 보험비를 예측하는 앱입니다.
 
